@@ -5,6 +5,7 @@ const int ledBLE = 13;
 const int stepPin = 3;
 const int dirPin = 4;
 const int buttonPin = 2;
+const int enablePin = 5;
 int buttonState, timePressed, startTime = 0;
 
 void setup() {
@@ -13,6 +14,7 @@ void setup() {
   pinMode(ledBLE, OUTPUT);
   pinMode(stepPin,OUTPUT);
   pinMode(dirPin,OUTPUT);
+  pinMode(enablePin, OUTPUT);
   pinMode(buttonPin, INPUT);
 }
 
@@ -35,7 +37,8 @@ void loop() {
   if (Serial.available())  {
     String command = Serial.readStringUntil('\n');
     if (command.indexOf("rotate") == 0) {
-      Serial.println("Rotated");//send what has been received
+      digitalWrite(enablePin,HIGH);
+      delayMicroseconds(500);
       digitalWrite(dirPin,HIGH); // Enables the motor to move in a particular direction
      
       // Makes 200 pulses for making one full cycle rotation
@@ -45,6 +48,8 @@ void loop() {
         digitalWrite(stepPin,LOW);
         delayMicroseconds(500);
       }
+      Serial.println("Rotated");//send what has been received
+      digitalWrite(enablePin,LOW);
     } else {
       Serial.println("Command not recognized");
     }
