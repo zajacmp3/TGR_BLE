@@ -7,12 +7,12 @@ const int dirPin = 4;
 const int buttonPin = 2;
 int buttonState, timePressed, startTime = 0;
 
-void setup() {
+void setup() 
   Serial.begin(115200);  //initial the Serial
   start();
   pinMode(ledBLE, OUTPUT);
   pinMode(stepPin,OUTPUT);
-  pinMode(dirPin,OUTPUT);
+  pinMode(dirPin,OUTPUT)
   pinMode(buttonPin, INPUT);
 }
 
@@ -23,7 +23,7 @@ void loop() {
       startTime = millis();  
     } else {
       timePressed = millis() - startTime;
-    }
+    
   } else {
     startTime = 0;
     timePressed = 0;
