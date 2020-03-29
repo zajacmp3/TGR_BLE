@@ -37,7 +37,7 @@ void loop() {
   if (Serial.available())  {
     String command = Serial.readStringUntil('\n');
     if (command.indexOf("rotate") == 0) {
-      digitalWrite(enablePin,HIGH);
+      digitalWrite(enablePin,LOW);
       delayMicroseconds(500);
       digitalWrite(dirPin,HIGH); // Enables the motor to move in a particular direction
      
@@ -49,7 +49,7 @@ void loop() {
         delayMicroseconds(500);
       }
       Serial.println("Rotated");//send what has been received
-      digitalWrite(enablePin,LOW);
+      digitalWrite(enablePin,HIGH);
     } else {
       Serial.println("Command not recognized");
     }
@@ -60,6 +60,7 @@ void loop() {
 
 void start() {
   delay(10);
+  digitalWrite(enablePin,HIGH);
   Serial.write("Initiated");
   Serial.println();
 }
